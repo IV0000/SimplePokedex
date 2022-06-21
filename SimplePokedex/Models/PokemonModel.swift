@@ -7,27 +7,34 @@
 
 import Foundation
 
+struct Result: Codable {
+    let next: String?
+    let previous: String?
+    let results: [Info]
+    
+}
+
 struct Pokemon: Codable {
     let id: Int
     let name: String
     let moves: [Move]
-    let species: Species // Pokedex description
+    let species: Info // Pokedex description
     let sprites: Sprites
     let types: [TypeElement]
 }
 
 struct Move: Codable {
-    let move: Species
+    let move: Info
 }
 
-struct Species: Codable {
+struct Info: Codable, Hashable {
     let name: String
     let url: String
 }
 
 struct TypeElement: Codable {
     let slot: Int
-    let type: Species
+    let type: Info
 }
 
 struct Sprites: Codable {
