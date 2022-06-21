@@ -10,16 +10,32 @@ import SwiftUI
 struct PokemonList: View {
     
     var result: [Info]
+    @State private var search = ""
+    
+    var searchedPokemon: [Info] {
+        if search.isEmpty {
+            return result
+        }
+        else {
+            return result.filter {
+                $0.name.capitalized.contains(search)
+            }
+        }
+    }
     
     var body: some View {
-        
-        List{
-            ForEach(result,id:\.self){ pokemon in
-                Text(pokemon.name.capitalized)
-                    
+        NavigationView {
+            List {
+                ForEach(searchedPokemon,id:\.self) { pokemon in
+                    NavigationLink(destination:EmptyView()) {
+                        Text(pokemon.name.capitalized)
+                    }
+                }
             }
-        }.listStyle(.inset)
-    
+            .listStyle(.inset)
+            .searchable(text: $search)
+            .navigationTitle("Pokédex")
+        }
     }
 }
 

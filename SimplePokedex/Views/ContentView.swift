@@ -21,6 +21,9 @@ struct ContentView: View {
         }
         else {
             PokemonList(result: networkVM.allPokemons)
+                .refreshable {
+                    networkVM.fetchAllPokemons()
+                }
         }
     }
 }
