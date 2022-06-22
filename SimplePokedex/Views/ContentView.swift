@@ -19,10 +19,7 @@ struct ContentView: View {
             ErrorView(networkVM: networkVM)
         }
         else {
-            PokemonList(result: networkVM.allPokemons)
-                .refreshable {
-                    networkVM.fetchAllPokemons()
-                }
+            PokemonList(networkVM: networkVM)
         }
     }
 }

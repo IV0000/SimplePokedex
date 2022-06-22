@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Result: Codable {
+struct FetchResult: Codable {
     let next: String?
     let previous: String?
     let results: [Info]
@@ -27,6 +27,7 @@ struct Move: Codable {
     let move: Info
 }
 
+// This couple name / url is reccurent in the API || Need to find a better name
 struct Info: Codable, Hashable, Comparable {
    
     let name: String
@@ -38,7 +39,7 @@ struct Info: Codable, Hashable, Comparable {
     }
 }
 
-struct TypeElement: Codable {
+struct TypeElement: Codable, Hashable {
     let slot: Int
     let type: Info
 }
