@@ -15,6 +15,8 @@
 		FFD068AB286124CE00EC89A3 /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD068AA286124CE00EC89A3 /* PokemonModel.swift */; };
 		FFD068AE286245AE00EC89A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD068AD286245AE00EC89A3 /* ContentView.swift */; };
 		FFD068B12862480D00EC89A3 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD068B02862480D00EC89A3 /* PreviewData.swift */; };
+		FFD068B32862E8CF00EC89A3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD068B22862E8CF00EC89A3 /* NetworkError.swift */; };
+		FFD068B528632EC500EC89A3 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD068B428632EC500EC89A3 /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		FFD068AA286124CE00EC89A3 /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
 		FFD068AD286245AE00EC89A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FFD068B02862480D00EC89A3 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
+		FFD068B22862E8CF00EC89A3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		FFD068B428632EC500EC89A3 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				FFD068A62861243C00EC89A3 /* NetworkManager.swift */,
+				FFD068B22862E8CF00EC89A3 /* NetworkError.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -105,8 +110,9 @@
 		FFD068AF2862460600EC89A3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FFD0689A2861236900EC89A3 /* PokemonList.swift */,
 				FFD068AD286245AE00EC89A3 /* ContentView.swift */,
+				FFD0689A2861236900EC89A3 /* PokemonList.swift */,
+				FFD068B428632EC500EC89A3 /* ErrorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,8 +188,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFD068A72861243C00EC89A3 /* NetworkManager.swift in Sources */,
+				FFD068B32862E8CF00EC89A3 /* NetworkError.swift in Sources */,
 				FFD068AE286245AE00EC89A3 /* ContentView.swift in Sources */,
 				FFD068B12862480D00EC89A3 /* PreviewData.swift in Sources */,
+				FFD068B528632EC500EC89A3 /* ErrorView.swift in Sources */,
 				FFD0689B2861236900EC89A3 /* PokemonList.swift in Sources */,
 				FFD068992861236900EC89A3 /* SimplePokedexApp.swift in Sources */,
 				FFD068AB286124CE00EC89A3 /* PokemonModel.swift in Sources */,

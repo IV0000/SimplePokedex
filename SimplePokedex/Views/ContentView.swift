@@ -12,12 +12,11 @@ struct ContentView: View {
     @StateObject var networkVM = NetworkManager()
     
     var body: some View {
-        
         if networkVM.isLoading {
             ProgressView()
         }
         else if networkVM.errorMessage != nil {
-            Text("errore")
+            ErrorView(networkVM: networkVM)
         }
         else {
             PokemonList(result: networkVM.allPokemons)

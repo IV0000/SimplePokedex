@@ -12,9 +12,9 @@ struct PokemonList: View {
     var result: [Info]
     @State private var search = ""
     
-    var searchedPokemon: [Info] {
+    var filteredPokemon: [Info] {
         if search.isEmpty {
-            return result
+            return result.sorted()
         }
         else {
             return result.filter {
@@ -26,7 +26,7 @@ struct PokemonList: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(searchedPokemon,id:\.self) { pokemon in
+                ForEach(filteredPokemon,id:\.self) { pokemon in
                     NavigationLink(destination:EmptyView()) {
                         Text(pokemon.name.capitalized)
                     }

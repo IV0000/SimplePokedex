@@ -27,9 +27,15 @@ struct Move: Codable {
     let move: Info
 }
 
-struct Info: Codable, Hashable {
+struct Info: Codable, Hashable, Comparable {
+   
     let name: String
     let url: String
+    
+    //Comparable stubs
+    static func < (lhs: Info, rhs: Info) -> Bool {
+        return lhs.name < rhs.name
+    }
 }
 
 struct TypeElement: Codable {
