@@ -9,18 +9,20 @@ import SwiftUI
 
 struct ErrorView: View {
     
-    @ObservedObject var networkVM: NetworkManager
+    var error : String
     
     var body: some View {
         VStack{
-            Text(networkVM.errorMessage ?? "An error occurred")
+            Spacer()
+            Text(error)
                 .font(.system(size:20))
+            Spacer()
         }
     }
 }
 
 struct ErrorView_Previews: PreviewProvider {
     static var previews: some View {
-        ErrorView(networkVM: NetworkManager())
+        ErrorView(error: "Error")
     }
 }

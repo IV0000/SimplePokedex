@@ -54,7 +54,7 @@ struct PokemonList: View {
                     }
                 }
             }
-            .searchable(text: $search)
+            .searchable(text: $search,placement: .navigationBarDrawer(displayMode: .always) ,prompt: "Search a pokemon")
             .disableAutocorrection(true)
         }
     }

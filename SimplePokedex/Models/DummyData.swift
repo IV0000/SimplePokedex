@@ -14,4 +14,4 @@ let dummyPokemon1 = [
     Info(name: "mimikyu-busted", url: "https://pokeapi.co/api/v2/pokemon/10143/")
 ]
 
-let defaultPokemon = Pokemon(id: 493, name: "arceus", moves: [Move](), species: Info(name: "arceus", url: "https://pokeapi.co/api/v2/pokemon-species/493/"), sprites: Sprites(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493.png", other: Other(officialArtwork: OfficialArtwork(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/493.png"))), types: [TypeElement]())
+let defaultPokemon = Pokemon(id: 493, name: "arceus", moves: [Move](), species: Info(name: "arceus", url: "https://pokeapi.co/api/v2/pokemon-species/493/"), sprites: Sprites(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493.png", backDefault: "", other: Other(officialArtwork: OfficialArtwork(frontDefault: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/493.png"))), types: [TypeElement]())

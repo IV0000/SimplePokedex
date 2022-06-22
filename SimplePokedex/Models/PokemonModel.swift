@@ -46,10 +46,12 @@ struct TypeElement: Codable, Hashable {
 
 struct Sprites: Codable {
     let frontDefault: String
+    let backDefault: String
     let other: Other
     
     enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"
+        case backDefault = "back_default"
         case other
     }
 }

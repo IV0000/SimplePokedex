@@ -10,9 +10,11 @@ import Foundation
 // Model to decode pokemon-species
 struct SpeciesInfo: Codable {
     let flavorTextEntries: [FlavorTextEntry]
+    let pokedexNumbers: [PokedexNumber]
     
     enum CodingKeys: String, CodingKey {
         case flavorTextEntries = "flavor_text_entries"
+        case pokedexNumbers = "pokedex_numbers"
     }
 }
 
@@ -24,5 +26,13 @@ struct FlavorTextEntry: Codable {
     enum CodingKeys: String, CodingKey {
         case flavorText = "flavor_text"
         case language
+    }
+}
+
+struct PokedexNumber: Codable {
+    let entryNumber: Int
+
+    enum CodingKeys: String, CodingKey {
+        case entryNumber = "entry_number"
     }
 }

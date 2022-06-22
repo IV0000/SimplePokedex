@@ -58,7 +58,7 @@ class NetworkManager : ObservableObject {
                 self.isLoading = false
                 switch result {
                 case .failure(let error):
-                    self.errorMessage = error.localizedDescription
+                    self.errorMessage = error.userDescription
                     print(error.description)
                 case .success(let allPokemons):
                     self.allPokemons = allPokemons.results
@@ -76,7 +76,7 @@ class NetworkManager : ObservableObject {
                 self.isLoadingDetail = false
                 switch result {
                 case .failure(let error):
-                    self.errorMessageDetail = error.localizedDescription
+                    self.errorMessageDetail = error.userDescription
                     print(error.description)
                 case .success(let pokemon):
                     self.pokemon = pokemon

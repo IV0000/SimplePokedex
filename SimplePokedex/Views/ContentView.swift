@@ -16,7 +16,7 @@ struct ContentView: View {
             ProgressView()
         }
         else if networkVM.errorMessage != nil {
-            ErrorView(networkVM: networkVM)
+            ErrorView(error: networkVM.errorMessage ?? "An error occurred")
         }
         else {
             PokemonList(networkVM: networkVM)
