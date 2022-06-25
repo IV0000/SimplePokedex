@@ -14,15 +14,24 @@ struct PokemonList: View {
     
     var filteredPokemon: [Info] {
         if selectedSort == 1 {
-            return networkVM.allPokemons.sorted(by: >)
-        }
-        else if !search.isEmpty {
-            return networkVM.allPokemons.filter {
-                $0.name.capitalized.contains(search)
+            if !search.isEmpty {
+                return networkVM.allPokemons.filter {
+                    $0.name.capitalized.contains(search)
+                }
+            }
+            else {
+                return networkVM.allPokemons.sorted(by: >)
             }
         }
         else {
-            return networkVM.allPokemons.sorted(by: <)
+            if !search.isEmpty {
+                return networkVM.allPokemons.filter {
+                    $0.name.capitalized.contains(search)
+                }
+            }
+            else {
+                return networkVM.allPokemons.sorted(by: <)
+            }
         }
     }
     

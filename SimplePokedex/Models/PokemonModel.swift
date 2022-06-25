@@ -23,7 +23,7 @@ struct Pokemon: Codable {
     let types: [TypeElement]
 }
 
-struct Move: Codable {
+struct Move: Codable, Hashable {
     let move: Info
 }
 

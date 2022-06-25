@@ -19,7 +19,7 @@ struct SpeciesInfo: Codable {
 }
 
 // Pokemon description
-struct FlavorTextEntry: Codable {
+struct FlavorTextEntry: Codable, Hashable {
     let flavorText: String
     let language: Info
 

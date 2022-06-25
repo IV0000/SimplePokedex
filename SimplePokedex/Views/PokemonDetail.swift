@@ -10,7 +10,11 @@ import SwiftUI
 struct PokemonDetail: View {
     
     @ObservedObject var networkVM: NetworkManager
-    var url : String
+    var url: String
+    
+    func typeColor (typeName: String) -> Color {
+        return (TypeColor.init(rawValue: String(typeName)) ?? .normal).color
+    }
     
     var body: some View {
         
@@ -26,8 +30,8 @@ struct PokemonDetail: View {
                 //MARK: - HEADER
                 HStack {
                     RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(.primary.opacity(0.2))
-                        .frame(width: 270, height: 210)
+                        .foregroundColor(typeColor(typeName: networkVM.pokemon.types.first?.type.name ?? "").opacity(0.15))
+                        .frame(width: 280, height: 210)
                         .overlay{
                             AsyncImage(url: URL(string: networkVM.pokemon.sprites.other.officialArtwork.frontDefault)) { phase in
                                 if let image = phase.image {
@@ -49,7 +53,7 @@ struct PokemonDetail: View {
                     Spacer()
                     VStack{
                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(.primary.opacity(0.2))
+                            .foregroundColor(typeColor(typeName: networkVM.pokemon.types.first?.type.name ?? "").opacity(0.15))
                             .frame(width: 100, height: 100)
                             .overlay{
                                 AsyncImage(url: URL(string: networkVM.pokemon.sprites.frontDefault)) { phase in
@@ -70,7 +74,7 @@ struct PokemonDetail: View {
                                 }
                             }
                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(.primary.opacity(0.2))
+                            .foregroundColor(typeColor(typeName: networkVM.pokemon.types.first?.type.name ?? "").opacity(0.15))
                             .frame(width: 100, height: 100)
                             .overlay{
                                 AsyncImage(url: URL(string: networkVM.pokemon.sprites.backDefault)) { phase in
@@ -99,18 +103,23 @@ struct PokemonDetail: View {
                             ForEach (networkVM.pokemon.types, id:\.self) { type in
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 30)
-                                        .foregroundColor(.gray)
+                                        .foregroundColor(typeColor(typeName: type.type.name))
                                         .frame(width: 100, height: 30)
                                     Text(type.type.name.capitalized)
                                 }
                             }
                             Spacer()
                         }
-                        Text("It is described in mythology as the Pokémon that shaped the universe with its 1,000 arms.")
+                        Text(networkVM.description)
                         
                         Text("Moves")
                             .font(.title2)
                             .padding(.top,5)
+                        
+                        ForEach(networkVM.pokemon.moves,id:\.self) { move in
+                            Text(move.move.name.capitalized)
+                            Divider()
+                        }
                         Spacer()
                     }
                 }
@@ -130,6 +139,8 @@ struct PokemonDetail: View {
         }
         .onAppear {
             networkVM.fetchPokemon(url: URL(string: url) ?? URL(fileURLWithPath: ""))
+            networkVM.fetchSpeciesInfo(url: URL(string: networkVM.pokemon.species.url) ?? URL(fileURLWithPath: ""))
+            networkVM.getDescription(lang: "en")
         }
     }
 }

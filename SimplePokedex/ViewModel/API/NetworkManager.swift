@@ -11,11 +11,13 @@ class NetworkManager : ObservableObject {
     
     @Published var pokemon : Pokemon = defaultPokemon
     @Published var allPokemons = [Info]()
+    @Published var pokemonInfo : SpeciesInfo = defaultSpecie
     
     @Published var errorMessage: String?
     @Published var errorMessageDetail: String?
     @Published var isLoading: Bool = false
     @Published var isLoadingDetail: Bool = false
+    @Published var description: String = ""
     
     init(){
         fetchAllPokemons()
@@ -83,8 +85,29 @@ class NetworkManager : ObservableObject {
                 }
             }
         })
-        
-        
+    }
+    
+    func fetchSpeciesInfo(url: URL) {
+      
+        fetchAPI(SpeciesInfo.self, url: url, completion: {[unowned self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .failure(let error):
+                    print(error.description)
+                case .success(let species):
+                    self.pokemonInfo = species
+                }
+            }
+        })
+    }
+    
+    func getDescription(lang: String) {
+        for description in pokemonInfo.flavorTextEntries {
+            if description.language.name == lang {
+                self.description = description.flavorText
+            }
+        }
+//        return networkVM.pokemonInfo.flavorTextEntries.first?.flavorText ?? "No description"
     }
     
     //    func fetchAllPokemons() {

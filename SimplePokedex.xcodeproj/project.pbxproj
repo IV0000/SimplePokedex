@@ -19,6 +19,7 @@
 		FFD068B528632EC500EC89A3 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD068B428632EC500EC89A3 /* ErrorView.swift */; };
 		FFD068B728634BFF00EC89A3 /* PokemonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD068B628634BFF00EC89A3 /* PokemonDetail.swift */; };
 		FFD068B92863661A00EC89A3 /* SpecieInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD068B82863661A00EC89A3 /* SpecieInfoModel.swift */; };
+		FFD068BB28644FCB00EC89A3 /* TypeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD068BA28644FCB00EC89A3 /* TypeColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		FFD068B428632EC500EC89A3 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		FFD068B628634BFF00EC89A3 /* PokemonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetail.swift; sourceTree = "<group>"; };
 		FFD068B82863661A00EC89A3 /* SpecieInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecieInfoModel.swift; sourceTree = "<group>"; };
+		FFD068BA28644FCB00EC89A3 /* TypeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				FFD068AD286245AE00EC89A3 /* ContentView.swift */,
 				FFD0689A2861236900EC89A3 /* PokemonList.swift */,
 				FFD068B628634BFF00EC89A3 /* PokemonDetail.swift */,
+				FFD068BA28644FCB00EC89A3 /* TypeColor.swift */,
 				FFD068B428632EC500EC89A3 /* ErrorView.swift */,
 			);
 			path = Views;
@@ -195,6 +198,7 @@
 			files = (
 				FFD068A72861243C00EC89A3 /* NetworkManager.swift in Sources */,
 				FFD068B32862E8CF00EC89A3 /* NetworkError.swift in Sources */,
+				FFD068BB28644FCB00EC89A3 /* TypeColor.swift in Sources */,
 				FFD068AE286245AE00EC89A3 /* ContentView.swift in Sources */,
 				FFD068B12862480D00EC89A3 /* DummyData.swift in Sources */,
 				FFD068B528632EC500EC89A3 /* ErrorView.swift in Sources */,
