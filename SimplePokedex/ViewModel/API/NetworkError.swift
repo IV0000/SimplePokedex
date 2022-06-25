@@ -29,7 +29,7 @@ enum NetworkError: Error, CustomStringConvertible {
     var description: String {
         switch self {
         case .parsing(let error):
-            return "parsing error: \(error?.localizedDescription ?? "")"
+            return "parsing error: \(String(describing: error))"
         case .badUrl:
             return "wrong URL"
         case .urlSession(let error):

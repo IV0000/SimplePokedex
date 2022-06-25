@@ -50,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF1A406D286712FB004DB1CD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FFD068BA28644FCB00EC89A3 /* TypeColor.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		FFD0688C2861236900EC89A3 = {
 			isa = PBXGroup;
 			children = (
@@ -120,8 +128,8 @@
 				FFD068AD286245AE00EC89A3 /* ContentView.swift */,
 				FFD0689A2861236900EC89A3 /* PokemonList.swift */,
 				FFD068B628634BFF00EC89A3 /* PokemonDetail.swift */,
-				FFD068BA28644FCB00EC89A3 /* TypeColor.swift */,
 				FFD068B428632EC500EC89A3 /* ErrorView.swift */,
+				FF1A406D286712FB004DB1CD /* Extensions */,
 			);
 			path = Views;
 			sourceTree = "<group>";

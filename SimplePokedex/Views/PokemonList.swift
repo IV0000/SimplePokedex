@@ -39,7 +39,6 @@ struct PokemonList: View {
     @State private var selectedSort = 0
     
     var body: some View {
-        NavigationView {
             VStack{
             List {
                 ForEach(filteredPokemon,id:\.self) { pokemon in
@@ -66,9 +65,10 @@ struct PokemonList: View {
             .searchable(text: $search,placement: .navigationBarDrawer(displayMode: .always) ,prompt: "Search a pokemon")
             .disableAutocorrection(true)
         }
-    }
 }
 
+
+//MARK: - PREVIEW
 struct PokemonList_Previews: PreviewProvider {
     static var previews: some View {
         PokemonList(networkVM: NetworkManager())

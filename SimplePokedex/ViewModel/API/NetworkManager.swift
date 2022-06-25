@@ -23,6 +23,7 @@ class NetworkManager : ObservableObject {
         fetchAllPokemons()
     }
     
+    //Generic function to fetch the API data
     func fetchAPI<T: Decodable>(_ type: T.Type, url: URL?, completion: @escaping(Result<T,NetworkError>) -> Void) {
         
         guard let url = url else {
@@ -49,6 +50,7 @@ class NetworkManager : ObservableObject {
         task.resume()
     }
     
+    //Function to fetch all pokemons
     func fetchAllPokemons() {
         isLoading = true
         errorMessage = nil
@@ -69,6 +71,7 @@ class NetworkManager : ObservableObject {
         })
     }
     
+    //Function to fetch specific pokemon
     func fetchPokemon(url: URL) {
         isLoadingDetail = true
         errorMessageDetail = nil
@@ -87,6 +90,7 @@ class NetworkManager : ObservableObject {
         })
     }
     
+    //Function to fetch specific info about a pokemon
     func fetchSpeciesInfo(url: URL) {
       
         fetchAPI(SpeciesInfo.self, url: url, completion: {[unowned self] result in
@@ -101,55 +105,12 @@ class NetworkManager : ObservableObject {
         })
     }
     
+    //Function to get the description of a pokemon
     func getDescription(lang: String) {
         for description in pokemonInfo.flavorTextEntries {
             if description.language.name == lang {
                 self.description = description.flavorText
             }
         }
-//        return networkVM.pokemonInfo.flavorTextEntries.first?.flavorText ?? "No description"
     }
-    
-    //    func fetchAllPokemons() {
-    //
-    //        isLoading = true
-    //
-    //        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=2000&offset=0") else {
-    //            errorMessage = NetworkError.badUrl.localizedDescription
-    //            return
-    //        }
-    //
-    //        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-    //
-    //            if let response = response as? HTTPURLResponse,!(200...299).contains(response.statusCode) {
-    //                DispatchQueue.main.async {
-    //                    self.errorMessage = NetworkError.response(statusCode: response.statusCode).localizedDescription
-    //                    print(NetworkError.response(statusCode: response.statusCode))
-    //                }
-    //            } else if let error = error as? URLError {
-    //                DispatchQueue.main.async {
-    //                    self.errorMessage = NetworkError.urlSession(error).localizedDescription
-    //                    print(NetworkError.urlSession(error))
-    //                }
-    //            } else if let data = data {
-    //                let decoder = JSONDecoder()
-    //
-    //                do {
-    //                    let pokemons = try decoder.decode(FetchResult.self, from: data)
-    //                    //                    print(pokemons)
-    //                    DispatchQueue.main.async {
-    //                        self.allPokemons = pokemons.results
-    //                    }
-    //                }catch {
-    //                    self.errorMessage = NetworkError.parsing(error as? DecodingError).localizedDescription
-    //                    print(NetworkError.parsing(error as? DecodingError))
-    //                }
-    //            }
-    //
-    //            DispatchQueue.main.async {
-    //                self.isLoading = false
-    //            }
-    //        }
-    //        task.resume()
-    //    }
 }

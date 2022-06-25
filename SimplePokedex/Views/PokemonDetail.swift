@@ -12,20 +12,33 @@ struct PokemonDetail: View {
     @ObservedObject var networkVM: NetworkManager
     var url: String
     
-    func typeColor (typeName: String) -> Color {
-        return (TypeColor.init(rawValue: String(typeName)) ?? .normal).color
-    }
-    
     var body: some View {
         
         VStack{
-        if networkVM.isLoadingDetail {
-            ProgressView()
+            if networkVM.isLoadingDetail {
+                ProgressView()
+            }
+            else if networkVM.errorMessageDetail != nil {
+                ErrorView(error: networkVM.errorMessageDetail ?? "An error occurred")
+            }
+            else{
+                PokemonDetailSubView(networkVM: networkVM)
+            }
         }
-        else if networkVM.errorMessageDetail != nil {
-            ErrorView(error: networkVM.errorMessageDetail ?? "An error occurred")
+        .onAppear {
+            networkVM.fetchPokemon(url: URL(string: url) ?? URL(fileURLWithPath: ""))
+            networkVM.fetchSpeciesInfo(url: URL(string: networkVM.pokemon.species.url) ?? URL(fileURLWithPath: ""))
+            networkVM.getDescription(lang: "en")
         }
-        else{
+    }
+}
+
+struct PokemonDetailSubView: View {
+    
+    @ObservedObject var networkVM: NetworkManager
+    
+    var body: some View {
+        ScrollView{
             VStack(spacing:12) {
                 //MARK: - HEADER
                 HStack {
@@ -33,7 +46,7 @@ struct PokemonDetail: View {
                         .foregroundColor(typeColor(typeName: networkVM.pokemon.types.first?.type.name ?? "").opacity(0.15))
                         .frame(width: 280, height: 210)
                         .overlay{
-                            AsyncImage(url: URL(string: networkVM.pokemon.sprites.other.officialArtwork.frontDefault)) { phase in
+                            AsyncImage(url: URL(string: networkVM.pokemon.sprites.other.officialArtwork.frontDefault )) { phase in
                                 if let image = phase.image {
                                     image
                                         .resizable()
@@ -52,11 +65,11 @@ struct PokemonDetail: View {
                         }
                     Spacer()
                     VStack{
-                       RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(typeColor(typeName: networkVM.pokemon.types.first?.type.name ?? "").opacity(0.15))
                             .frame(width: 100, height: 100)
                             .overlay{
-                                AsyncImage(url: URL(string: networkVM.pokemon.sprites.frontDefault)) { phase in
+                                AsyncImage(url: URL(string: networkVM.pokemon.sprites.frontDefault ?? "")) { phase in
                                     if let image = phase.image {
                                         image
                                             .resizable()
@@ -68,16 +81,15 @@ struct PokemonDetail: View {
                                         ProgressView()
                                     }
                                     else {
-                                        //No image
                                         ProgressView()
                                     }
                                 }
                             }
-                       RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(typeColor(typeName: networkVM.pokemon.types.first?.type.name ?? "").opacity(0.15))
                             .frame(width: 100, height: 100)
                             .overlay{
-                                AsyncImage(url: URL(string: networkVM.pokemon.sprites.backDefault)) { phase in
+                                AsyncImage(url: URL(string: networkVM.pokemon.sprites.backDefault ?? "")) { phase in
                                     if let image = phase.image {
                                         image
                                             .resizable()
@@ -89,7 +101,6 @@ struct PokemonDetail: View {
                                         ProgressView()
                                     }
                                     else {
-                                        //No image
                                         ProgressView()
                                     }
                                 }
@@ -97,55 +108,50 @@ struct PokemonDetail: View {
                     }
                 }
                 //MARK: - BOTTOM
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading) {
-                        HStack{
-                            ForEach (networkVM.pokemon.types, id:\.self) { type in
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 30)
-                                        .foregroundColor(typeColor(typeName: type.type.name))
-                                        .frame(width: 100, height: 30)
-                                    Text(type.type.name.capitalized)
-                                }
+                VStack(alignment: .leading) {
+                    HStack{
+                        ForEach (networkVM.pokemon.types, id:\.self) { type in
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 30)
+                                    .foregroundColor(typeColor(typeName: type.type.name))
+                                    .frame(width: 100, height: 30)
+                                Text(type.type.name.capitalized)
                             }
-                            Spacer()
-                        }
-                        Text(networkVM.description)
-                        
-                        Text("Moves")
-                            .font(.title2)
-                            .padding(.top,5)
-                        
-                        ForEach(networkVM.pokemon.moves,id:\.self) { move in
-                            Text(move.move.name.capitalized)
-                            Divider()
                         }
                         Spacer()
                     }
+                    Text(networkVM.description)
+                    
+                    Text("Moves")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .padding(.vertical,5)
+                    Divider()
+                    ForEach(networkVM.pokemon.moves,id:\.self) { move in
+                        Text(move.move.name.capitalized)
+                        Divider()
+                    }
+                    Spacer()
                 }
-                
             }
-            .padding(.vertical)
-            .padding(.horizontal,12)
-            .navigationTitle(networkVM.pokemon.name.capitalized)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Text("#\(networkVM.pokemon.id)")
-                }
+        }
+        .padding(.vertical)
+        .padding(.horizontal,12)
+        .navigationTitle(networkVM.pokemon.name.capitalized)
+        .navigationBarTitleDisplayMode(.automatic)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Text("#\(networkVM.pokemon.id)")
             }
-            
         }
-        }
-        .onAppear {
-            networkVM.fetchPokemon(url: URL(string: url) ?? URL(fileURLWithPath: ""))
-            networkVM.fetchSpeciesInfo(url: URL(string: networkVM.pokemon.species.url) ?? URL(fileURLWithPath: ""))
-            networkVM.getDescription(lang: "en")
-        }
+    }
+    
+    func typeColor (typeName: String) -> Color {
+        return (TypeColor.init(rawValue: String(typeName)) ?? .normal).color
     }
 }
 
-
+//MARK: - PREVIEW
 struct PokemonDetail_Previews: PreviewProvider {
     static var previews: some View {
         PokemonDetail(networkVM: NetworkManager(), url: "https://pokeapi.co/api/v2/pokemon/13/")
