@@ -39,7 +39,7 @@ struct PokemonList: View {
     @State private var selectedSort = 0
     
     var body: some View {
-            VStack{
+        VStack{
             List {
                 ForEach(filteredPokemon,id:\.self) { pokemon in
                     NavigationLink(destination:PokemonDetail(networkVM: networkVM, url: pokemon.url)) {
@@ -48,23 +48,23 @@ struct PokemonList: View {
                 }
             }
             .listStyle(.plain)
-            }
-            .navigationTitle("Pokédex")
-            .refreshable {
-                networkVM.fetchAllPokemons()
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Picker(selection: $selectedSort, label: Text("Sort")) {
-                        ForEach(0..<sortTypes.count) {
-                            Text(self.sortTypes[$0])
-                        }
+        }
+        .navigationTitle("Pokédex")
+        .refreshable {
+            networkVM.fetchAllPokemons()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Picker(selection: $selectedSort, label: Text("Sort")) {
+                    ForEach(0..<sortTypes.count) {
+                        Text(self.sortTypes[$0])
                     }
                 }
             }
-            .searchable(text: $search,placement: .navigationBarDrawer(displayMode: .always) ,prompt: "Search a pokemon")
-            .disableAutocorrection(true)
         }
+        .searchable(text: $search,placement: .navigationBarDrawer(displayMode: .always) ,prompt: "Search a pokemon")
+        .disableAutocorrection(true)
+    }
 }
 
 

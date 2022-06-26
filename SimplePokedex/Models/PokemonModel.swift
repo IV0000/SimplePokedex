@@ -19,7 +19,7 @@ struct Pokemon: Codable {
     let name: String
     let moves: [Move]
     let species: Info // Pokedex description
-    let sprites: Sprites
+    let sprites: Sprites?
     let types: [TypeElement]
 }
 
@@ -47,7 +47,7 @@ struct TypeElement: Codable, Hashable {
 struct Sprites: Codable {
     let frontDefault: String?
     let backDefault: String?
-    let other: Other
+    let other: Other?
     
     enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"
@@ -57,7 +57,7 @@ struct Sprites: Codable {
 }
 
 struct Other: Codable {
-    let officialArtwork: OfficialArtwork
+    let officialArtwork: OfficialArtwork?
 
     enum CodingKeys: String, CodingKey {
         case officialArtwork = "official-artwork"
@@ -65,7 +65,7 @@ struct Other: Codable {
 }
 
 struct OfficialArtwork: Codable {
-    let frontDefault: String
+    let frontDefault: String?
 
     enum CodingKeys: String, CodingKey {
         case frontDefault = "front_default"

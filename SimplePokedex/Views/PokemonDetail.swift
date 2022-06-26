@@ -38,7 +38,7 @@ struct PokemonDetailSubView: View {
     @ObservedObject var networkVM: NetworkManager
     
     var body: some View {
-        ScrollView{
+        ScrollView(showsIndicators: false){
             VStack(spacing:12) {
                 //MARK: - HEADER
                 HStack {
@@ -46,7 +46,7 @@ struct PokemonDetailSubView: View {
                         .foregroundColor(typeColor(typeName: networkVM.pokemon.types.first?.type.name ?? "").opacity(0.15))
                         .frame(width: 280, height: 210)
                         .overlay{
-                            AsyncImage(url: URL(string: networkVM.pokemon.sprites.other.officialArtwork.frontDefault )) { phase in
+                            AsyncImage(url: URL(string: networkVM.pokemon.sprites?.other?.officialArtwork?.frontDefault ?? "" )) { phase in
                                 if let image = phase.image {
                                     image
                                         .resizable()
@@ -59,7 +59,7 @@ struct PokemonDetailSubView: View {
                                 }
                                 else {
                                     //No image
-                                    ProgressView()
+                                    Text("No image")
                                 }
                             }
                         }
@@ -69,7 +69,7 @@ struct PokemonDetailSubView: View {
                             .foregroundColor(typeColor(typeName: networkVM.pokemon.types.first?.type.name ?? "").opacity(0.15))
                             .frame(width: 100, height: 100)
                             .overlay{
-                                AsyncImage(url: URL(string: networkVM.pokemon.sprites.frontDefault ?? "")) { phase in
+                                AsyncImage(url: URL(string: networkVM.pokemon.sprites?.frontDefault ?? "")) { phase in
                                     if let image = phase.image {
                                         image
                                             .resizable()
@@ -81,7 +81,7 @@ struct PokemonDetailSubView: View {
                                         ProgressView()
                                     }
                                     else {
-                                        ProgressView()
+                                        Text("No image")
                                     }
                                 }
                             }
@@ -89,7 +89,7 @@ struct PokemonDetailSubView: View {
                             .foregroundColor(typeColor(typeName: networkVM.pokemon.types.first?.type.name ?? "").opacity(0.15))
                             .frame(width: 100, height: 100)
                             .overlay{
-                                AsyncImage(url: URL(string: networkVM.pokemon.sprites.backDefault ?? "")) { phase in
+                                AsyncImage(url: URL(string: networkVM.pokemon.sprites?.backDefault ?? "")) { phase in
                                     if let image = phase.image {
                                         image
                                             .resizable()
@@ -101,7 +101,7 @@ struct PokemonDetailSubView: View {
                                         ProgressView()
                                     }
                                     else {
-                                        ProgressView()
+                                        Text("No image")
                                     }
                                 }
                             }
